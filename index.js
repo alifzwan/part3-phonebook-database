@@ -1,4 +1,8 @@
 
+// 3.15: Phonebook database, step 3
+// 3.16: Phonebook database, step 4
+// 3.17*: Phonebook database, step 5
+
 
 
 require('dotenv').config() 
@@ -60,7 +64,7 @@ app.get('/api/persons/:id', (request, response, next) => {
                 response.status(404).end()
             }
          })
-         .catct(error => next(error))
+         .catch(error => next(error))
 })
 
 // DELETE request - persons/:id
@@ -71,6 +75,23 @@ app.delete('/api/persons/:id', (request, response, next) => { // Define a route 
         })
         .catch(error => next(error))
 })
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+
+    const person = {
+        name: body.name,
+        number: body.number
+    }
+
+    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+        })
+        .catch(error => next(error))
+})
+
+
 
 // POST request - persons
 app.post('/api/persons', (request, response, next) => { // Define a route handler for the path /api/persons
