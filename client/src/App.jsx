@@ -48,7 +48,7 @@ const App = () => {
       event.preventDefault()
       const personExists = persons.find(person => person.name === newName ) // Check if name already exists in phonebook
       if (personExists) { 
-          const result = window.confirm(`${newNumber} is already added to phonebook, replace the old number with a new one?`)
+          const result = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
             if (result){
               const changedPerson = {...personExists, number: newNumber}
               personsService
