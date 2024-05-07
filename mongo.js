@@ -52,7 +52,7 @@ Person.find({}).then(result => { // The notes in the database are fetched.
 
 
 //! The note object is saved to the database.
-// person.save().then(result => { // The note object is saved to the database.
+// person.save().then(person => { // The note object is saved to the database.
 //     console.log(`added ${person.name} number ${person.number} to the phonebook\n`)
 //     mongoose.connection.close()
 // })
