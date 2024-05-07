@@ -1,3 +1,6 @@
+// 3.19*: Phonebook database, step 7
+
+
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import personsService from './services/persons'
@@ -5,6 +8,8 @@ import Person from './components/Person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Notification from './components/Notification'
+
+
 
 const App = () => {
   
@@ -47,6 +52,12 @@ const App = () => {
     const addPerson = (event) => {
       event.preventDefault()
       const personExists = persons.find(person => person.name === newName ) // Check if name already exists in phonebook
+
+      if(newName.length < 3){
+        showError("Person validation failed: name: Path `name` (`" + newName + "`) is shorter than the minimum allowed length (3)")
+        return 
+      } 
+
       if (personExists) { 
           const result = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
             if (result){
