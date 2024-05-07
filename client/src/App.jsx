@@ -51,13 +51,18 @@ const App = () => {
 
     const addPerson = (event) => {
       event.preventDefault()
-      const personExists = persons.find(person => person.name === newName ) // Check if name already exists in phonebook
-
       if(newName.length < 3){
         showError("Person validation failed: name: Path `name` (`" + newName + "`) is shorter than the minimum allowed length (3)")
         return 
       } 
 
+      const numberFormat = /^(0\d{1,2}-\d{6,})$/
+      if(!newNumber || !numberFormat.test(newNumber)){
+        showError("Person validation failed: number: Path `number` (`" + newNumber + "`) is not a valid phone number!")
+        return
+      }
+
+      const personExists = persons.find(person => person.name === newName ) // Check if name already exists in phonebook
       if (personExists) { 
           const result = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
             if (result){
