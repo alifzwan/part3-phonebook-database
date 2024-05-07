@@ -47,14 +47,6 @@ app.get('/api/persons', (request, response) => {
     })
 })
 
-// GET request - info
-app.get('/info', (request, response) => { 
-    const date = new Date() // Get the current date
-    response.send(
-        `<p>Phonebook has info for ${persons.length} people</p>
-        <p>${date}</p>`
-    )
-})
 
 // GET request - persons/:id
 app.get('/api/persons/:id', (request, response, next) => { 
@@ -72,9 +64,9 @@ app.get('/api/persons/:id', (request, response, next) => {
 // DELETE request - persons/:id
 app.delete('/api/persons/:id', (request, response, next) => { // Define a route handler for the path /api/persons/:id
    Person.findByIdAndDelete(request.params.id)
-        .then (result => {
+        .then ( 
             response.status(204).end()
-        })
+        )
         .catch(error => next(error))
 })
 
